@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.session;
+package org.luigilp.lpchestshop.session;
 
 import java.util.HashMap;
 import java.util.Map;

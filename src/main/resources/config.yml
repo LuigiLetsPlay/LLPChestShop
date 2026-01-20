@@ -4,13 +4,13 @@ settings:
     require-empty-chest: true
 
     # By default everyone can create shops.
-    # If true, players MUST have ezchestshop.create.
+    # If true, players MUST have lpchestshop.create.
     permission-required: false
 
     # -1 = unlimited
     max-shops-per-player: -1
 
-    # If player runs /ezcs create without args, they can type amount+price in chat.
+    # If player runs /lpcs create without args, they can type amount+price in chat.
     chat-fallback-enabled: true
     chat-timeout-seconds: 30
 
@@ -94,10 +94,10 @@ gui:
         name: "&eHow it works"
         lore:
           - "&7Hold the item in your main hand."
-          - "&7Command: &f/ezcs create <amount> <price>"
-          - "&7Example: &f/ezcs create 16 20k"
+          - "&7Command: &f/lpcs create <amount> <price>"
+          - "&7Example: &f/lpcs create 16 20k"
           - "&7You can also type &f16 20k &7in chat"
-          - "&7if you used &f/ezcs create &7without args."
+          - "&7if you used &f/lpcs create &7without args."
         custom-model-data: 0
         glow: false
 

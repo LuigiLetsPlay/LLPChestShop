@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop;
+package org.luigilp.lpchestshop;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -7,20 +7,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.luigilp.lLPChestShop.command.LLPChestShopCommand;
-import org.luigilp.lLPChestShop.gui.GuiFactory;
-import org.luigilp.lLPChestShop.listeners.*;
-import org.luigilp.lLPChestShop.model.Shop;
-import org.luigilp.lLPChestShop.session.SessionManager;
-import org.luigilp.lLPChestShop.shop.ShopManager;
-import org.luigilp.lLPChestShop.util.GitHubReleaseUpdateChecker;
-import org.luigilp.lLPChestShop.util.Messages;
-import org.luigilp.lLPChestShop.util.Text;
+import org.luigilp.lpchestshop.command.LPChestShopCommand;
+import org.luigilp.lpchestshop.gui.GuiFactory;
+import org.luigilp.lpchestshop.listeners.*;
+import org.luigilp.lpchestshop.model.Shop;
+import org.luigilp.lpchestshop.session.SessionManager;
+import org.luigilp.lpchestshop.shop.ShopManager;
+import org.luigilp.lpchestshop.util.GitHubReleaseUpdateChecker;
+import org.luigilp.lpchestshop.util.Messages;
+import org.luigilp.lpchestshop.util.Text;
 
 import java.util.List;
 import java.util.Map;
 
-public final class LLPChestShop extends JavaPlugin {
+public final class LPChestShop extends JavaPlugin {
 
     private Messages messages;
     private SessionManager sessionManager;
@@ -53,22 +53,22 @@ public final class LLPChestShop extends JavaPlugin {
         pm.registerEvents(new ChestDepositListener(this), this);
         pm.registerEvents(new ChestStockUpdateListener(this), this);
 
-        var cmd = getCommand("ezchestshop");
+        var cmd = getCommand("lpchestshop");
         if (cmd != null) {
-            var executor = new LLPChestShopCommand(this);
+            var executor = new LPChestShopCommand(this);
             cmd.setExecutor(executor);
             cmd.setTabCompleter(executor);
         }
 
-        GitHubReleaseUpdateChecker.check(this, "LuigiLetsPlay", "LLPChestShop");
+        GitHubReleaseUpdateChecker.check(this, "LuigiLetsPlay", "LPChestShop");
 
-        getLogger().info("LLPChestShop enabled.");
+        getLogger().info("LPChestShop enabled.");
     }
 
     @Override
     public void onDisable() {
         if (shopManager != null) shopManager.save();
-        getLogger().info("LLPChestShop disabled.");
+        getLogger().info("LPChestShop disabled.");
     }
 
     public void reloadAll() {

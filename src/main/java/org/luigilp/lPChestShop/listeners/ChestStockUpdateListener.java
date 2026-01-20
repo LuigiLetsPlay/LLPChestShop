@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -8,14 +8,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
 
 public final class ChestStockUpdateListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public ChestStockUpdateListener(LLPChestShop plugin) {
+    public ChestStockUpdateListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 

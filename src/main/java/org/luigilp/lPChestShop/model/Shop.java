@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.model;
+package org.luigilp.lpchestshop.model;
 
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;

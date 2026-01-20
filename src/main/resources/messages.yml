@@ -1,11 +1,11 @@
-prefix: "&aLLPChestShop &7»&r "
+prefix: "&aLPChestShop &7»&r "
 
 help:
   lines:
-    - "&f/ezcs create <amount> <price> &7- Create a shop (look at a chest, item in hand)"
-    - "&f/ezcs info &7- Info about the shop you're looking at"
-    - "&f/ezcs remove &7- Remove the shop you're looking at (admin/owner)"
-    - "&f/ezcs reload &7- Reload configs (admin)"
+    - "&f/lpcs create <amount> <price> &7- Create a shop (look at a chest, item in hand)"
+    - "&f/lpcs info &7- Info about the shop you're looking at"
+    - "&f/lpcs remove &7- Remove the shop you're looking at (admin/owner)"
+    - "&f/lpcs reload &7- Reload configs (admin)"
 
 errors:
   no-permission: "&cYou don't have permission."
@@ -13,7 +13,7 @@ errors:
   not-looking-at-chest: "&cLook at a chest within {distance} blocks."
   chest-not-empty: "&cThe chest must be empty to create a shop."
   need-item-in-hand: "&cYou must hold the shop item in your main hand."
-  invalid-format: "&cInvalid format. Use: &f/ezcs create <amount> <price>&c. Example: &f/ezcs create 16 20k"
+  invalid-format: "&cInvalid format. Use: &f/lpcs create <amount> <price>&c. Example: &f/lpcs create 16 20k"
   sign-blocked: "&cCan't place the shop sign in front of the chest."
   economy-missing: "&cEconomy not available. Install Vault + an economy plugin."
   out-of-stock: "&cOut of stock."

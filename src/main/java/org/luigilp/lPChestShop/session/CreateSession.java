@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.session;
+package org.luigilp.lpchestshop.session;
 
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;

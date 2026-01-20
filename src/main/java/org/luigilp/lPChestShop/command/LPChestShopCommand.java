@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.command;
+package org.luigilp.lpchestshop.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -6,22 +6,22 @@ import org.bukkit.block.Block;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
-import org.luigilp.lLPChestShop.session.CreateSession;
-import org.luigilp.lLPChestShop.util.ItemUtils;
-import org.luigilp.lLPChestShop.util.MoneyParser;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
+import org.luigilp.lpchestshop.session.CreateSession;
+import org.luigilp.lpchestshop.util.ItemUtils;
+import org.luigilp.lpchestshop.util.MoneyParser;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public final class LLPChestShopCommand implements CommandExecutor, TabCompleter {
+public final class LPChestShopCommand implements CommandExecutor, TabCompleter {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public LLPChestShopCommand(LLPChestShop plugin) {
+    public LPChestShopCommand(LPChestShop plugin) {
         this.plugin = plugin;
     }
 
@@ -36,12 +36,12 @@ public final class LLPChestShopCommand implements CommandExecutor, TabCompleter 
         String sub = args[0].toLowerCase();
 
         if (sub.equals("reload")) {
-            if (!sender.hasPermission("ezchestshop.reload")) {
+            if (!sender.hasPermission("lpchestshop.reload")) {
                 plugin.getMessages().send(sender, "errors.no-permission");
                 return true;
             }
             plugin.reloadAll();
-            sender.sendMessage("LLPChestShop reloaded.");
+            sender.sendMessage("LPChestShop reloaded.");
             return true;
         }
 
@@ -52,7 +52,7 @@ public final class LLPChestShopCommand implements CommandExecutor, TabCompleter 
 
         if (sub.equals("create")) {
             boolean permRequired = plugin.getConfig().getBoolean("settings.create.permission-required", false);
-            if (permRequired && !player.hasPermission("ezchestshop.create")) {
+            if (permRequired && !player.hasPermission("lpchestshop.create")) {
                 plugin.getMessages().send(player, "errors.no-permission");
                 return true;
             }
@@ -163,7 +163,7 @@ public final class LLPChestShopCommand implements CommandExecutor, TabCompleter 
             }
 
             boolean owner = shop.getOwner().equals(player.getUniqueId());
-            boolean can = (owner && player.hasPermission("ezchestshop.remove.own")) || player.hasPermission("ezchestshop.remove.any");
+            boolean can = (owner && player.hasPermission("lpchestshop.remove.own")) || player.hasPermission("lpchestshop.remove.any");
             if (!can) {
                 plugin.getMessages().send(player, "errors.no-permission");
                 return true;
@@ -185,7 +185,7 @@ public final class LLPChestShopCommand implements CommandExecutor, TabCompleter 
             out.add("create");
             out.add("info");
             out.add("remove");
-            if (sender.hasPermission("ezchestshop.reload")) out.add("reload");
+            if (sender.hasPermission("lpchestshop.reload")) out.add("reload");
             out.add("help");
         }
         return out;

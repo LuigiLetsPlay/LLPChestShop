@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.shop;
+package org.luigilp.lpchestshop.shop;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.*;
@@ -11,10 +11,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.WallSign;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
-import org.luigilp.lLPChestShop.util.ItemUtils;
-import org.luigilp.lLPChestShop.util.Text;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
+import org.luigilp.lpchestshop.util.ItemUtils;
+import org.luigilp.lpchestshop.util.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.util.*;
 
 public final class ShopManager {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
     private final Map<String, Shop> shopsById = new HashMap<>();
     private final Map<String, String> chestKeyToId = new HashMap<>();
@@ -31,7 +31,7 @@ public final class ShopManager {
     private File file;
     private YamlConfiguration yml;
 
-    public ShopManager(LLPChestShop plugin) {
+    public ShopManager(LPChestShop plugin) {
         this.plugin = plugin;
         this.file = new File(plugin.getDataFolder(), "shops.yml");
         this.yml = YamlConfiguration.loadConfiguration(file);

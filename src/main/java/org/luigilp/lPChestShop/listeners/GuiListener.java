@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,16 +8,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.gui.GuiHolder;
-import org.luigilp.lLPChestShop.session.CreateSession;
-import org.luigilp.lLPChestShop.util.ItemUtils;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.gui.GuiHolder;
+import org.luigilp.lpchestshop.session.CreateSession;
+import org.luigilp.lpchestshop.util.ItemUtils;
 
 public final class GuiListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public GuiListener(LLPChestShop plugin) {
+    public GuiListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 

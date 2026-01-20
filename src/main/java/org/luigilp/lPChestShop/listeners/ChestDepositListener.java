@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -11,15 +11,15 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
-import org.luigilp.lLPChestShop.util.ItemUtils;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
+import org.luigilp.lpchestshop.util.ItemUtils;
 
 public final class ChestDepositListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public ChestDepositListener(LLPChestShop plugin) {
+    public ChestDepositListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 
@@ -33,7 +33,7 @@ public final class ChestDepositListener implements Listener {
         Shop shop = resolveShopFromTopInventory(top);
         if (shop == null) return;
 
-        boolean bypass = player.hasPermission("ezchestshop.bypass");
+        boolean bypass = player.hasPermission("lpchestshop.bypass");
         boolean owner = shop.getOwner().equals(player.getUniqueId());
 
         if (!owner && !bypass) {
@@ -77,7 +77,7 @@ public final class ChestDepositListener implements Listener {
         Shop shop = resolveShopFromTopInventory(top);
         if (shop == null) return;
 
-        boolean bypass = player.hasPermission("ezchestshop.bypass");
+        boolean bypass = player.hasPermission("lpchestshop.bypass");
         boolean owner = shop.getOwner().equals(player.getUniqueId());
 
         if (!owner && !bypass) {

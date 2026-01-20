@@ -1,19 +1,19 @@
-package org.luigilp.lLPChestShop.gui;
+package org.luigilp.lpchestshop.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
-import org.luigilp.lLPChestShop.util.ItemBuilder;
-import org.luigilp.lLPChestShop.util.Text;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
+import org.luigilp.lpchestshop.util.ItemBuilder;
+import org.luigilp.lpchestshop.util.Text;
 
 public final class GuiFactory {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public GuiFactory(LLPChestShop plugin) {
+    public GuiFactory(LPChestShop plugin) {
         this.plugin = plugin;
     }
 

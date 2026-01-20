@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.gui;
+package org.luigilp.lpchestshop.gui;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

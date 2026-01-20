@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.util;
+package org.luigilp.lpchestshop.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

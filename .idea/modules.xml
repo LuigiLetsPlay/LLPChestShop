@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LLPChestShop.iml" filepath="$PROJECT_DIR$/LLPChestShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LPChestShop.iml" filepath="$PROJECT_DIR$/LPChestShop.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -9,15 +9,15 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.session.CreateSession;
-import org.luigilp.lLPChestShop.util.MoneyParser;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.session.CreateSession;
+import org.luigilp.lpchestshop.util.MoneyParser;
 
 public final class ChatListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public ChatListener(LLPChestShop plugin) {
+    public ChatListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 

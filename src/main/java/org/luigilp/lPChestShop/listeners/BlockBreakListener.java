@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -9,8 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public final class BlockBreakListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
     private static final class Pending {
         final String shopId;
@@ -32,7 +32,7 @@ public final class BlockBreakListener implements Listener {
 
     private final Map<UUID, Pending> pending = new HashMap<>();
 
-    public BlockBreakListener(LLPChestShop plugin) {
+    public BlockBreakListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 
@@ -63,7 +63,7 @@ public final class BlockBreakListener implements Listener {
         }
 
         boolean owner = shop.getOwner().equals(player.getUniqueId());
-        boolean canRemove = (owner && player.hasPermission("ezchestshop.remove.own")) || player.hasPermission("ezchestshop.remove.any");
+        boolean canRemove = (owner && player.hasPermission("lpchestshop.remove.own")) || player.hasPermission("lpchestshop.remove.any");
         if (!canRemove) {
             event.setCancelled(true);
             plugin.getMessages().send(player, "remove.not-owner");

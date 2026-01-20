@@ -1,4 +1,4 @@
-# LLPChestShop
+# LPChestShop
 
 A lightweight, user-friendly chest shop plugin for Paper 1.20+ that lets players create clean, secure in-world shops using chests + signs — with a polished GUI flow, strict item matching, and Vault economy support.
 
@@ -39,7 +39,7 @@ A lightweight, user-friendly chest shop plugin for Paper 1.20+ that lets players
 
 > Aliases shown where applicable.
 
-- `/ezchestshop` (alias: `/ezcs`)
+- `/lpchestshop` (alias: `/lpcs`)
   - `create <amount> <price>` — Create a shop using the item in your main hand  
   - `info` — Show info about the shop you are looking at  
   - `remove` — Remove the shop you are looking at (requires permission)  
@@ -47,15 +47,15 @@ A lightweight, user-friendly chest shop plugin for Paper 1.20+ that lets players
 
 ## 🔐 Permissions
 
-- `ezchestshop.create` — Create shops (default: true)
-- `ezchestshop.reload` — Reload plugin (default: op)
-- `ezchestshop.remove.own` — Remove your own shop (default: true)
-- `ezchestshop.remove.any` — Remove any shop (default: op)
-- `ezchestshop.bypass` — Bypass restrictions (default: op)
+- `lpchestshop.create` — Create shops (default: true)
+- `lpchestshop.reload` — Reload plugin (default: op)
+- `lpchestshop.remove.own` — Remove your own shop (default: true)
+- `lpchestshop.remove.any` — Remove any shop (default: op)
+- `lpchestshop.bypass` — Bypass restrictions (default: op)
 
 ## ⚙️ Configuration
 
-LLPChestShop is designed to be heavily configurable:
+LPChestShop is designed to be heavily configurable:
 - GUI layout (slots)
 - GUI item materials, names, lore
 - Custom model data

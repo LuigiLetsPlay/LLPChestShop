@@ -1,4 +1,4 @@
-package org.luigilp.lLPChestShop.listeners;
+package org.luigilp.lpchestshop.listeners;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -9,14 +9,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.luigilp.lLPChestShop.LLPChestShop;
-import org.luigilp.lLPChestShop.model.Shop;
+import org.luigilp.lpchestshop.LPChestShop;
+import org.luigilp.lpchestshop.model.Shop;
 
 public final class InteractListener implements Listener {
 
-    private final LLPChestShop plugin;
+    private final LPChestShop plugin;
 
-    public InteractListener(LLPChestShop plugin) {
+    public InteractListener(LPChestShop plugin) {
         this.plugin = plugin;
     }
 
@@ -54,7 +54,7 @@ public final class InteractListener implements Listener {
             if (shop == null) return;
 
             boolean owner = shop.getOwner().equals(player.getUniqueId());
-            boolean bypass = player.hasPermission("ezchestshop.bypass");
+            boolean bypass = player.hasPermission("lpchestshop.bypass");
 
             if (!owner && !bypass) {
                 event.setCancelled(true);
@@ -65,7 +65,7 @@ public final class InteractListener implements Listener {
 
     private boolean canRemove(Player p, Shop shop) {
         boolean owner = shop.getOwner().equals(p.getUniqueId());
-        return (owner && p.hasPermission("ezchestshop.remove.own")) || p.hasPermission("ezchestshop.remove.any");
+        return (owner && p.hasPermission("lpchestshop.remove.own")) || p.hasPermission("lpchestshop.remove.any");
     }
 
     private boolean isAxe(ItemStack it) {
