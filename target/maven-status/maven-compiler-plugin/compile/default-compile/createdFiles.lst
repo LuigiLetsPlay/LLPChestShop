@@ -5,7 +5,6 @@ org\luigilp\ezChestShop\listeners\BlockBreakListener.class
 org\luigilp\ezChestShop\listeners\ChestStockUpdateListener.class
 org\luigilp\ezChestShop\util\ItemBuilder.class
 org\luigilp\ezChestShop\gui\GuiHolder.class
-org\luigilp\ezChestShop\util\GitHubReleaseUpdateChecker.class
 org\luigilp\ezChestShop\listeners\ChestDepositListener.class
 org\luigilp\ezChestShop\model\Shop.class
 org\luigilp\ezChestShop\shop\ShopManager.class

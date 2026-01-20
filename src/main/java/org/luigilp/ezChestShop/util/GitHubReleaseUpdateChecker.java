@@ -1,8 +1,6 @@
 package org.luigilp.ezChestShop.util;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.net.URI;
@@ -27,12 +25,11 @@ public final class GitHubReleaseUpdateChecker {
             String latest = normalizeVersion(latestTag);
             int cmp = compareVersionNumbers(latest, current);
 
-            ConsoleCommandSender console = Bukkit.getConsoleSender();
             Bukkit.getScheduler().runTask(plugin, () -> {
                 if (cmp > 0) {
-                    console.sendMessage(ChatColor.RED + "You are not on the latest version! Current: " + current + " Newest: " + latest);
+                    plugin.getLogger().severe("You are not on the latest version! Current: " + current + " Newest: " + latest);
                 } else {
-                    console.sendMessage(ChatColor.GREEN + "You have the latest version. Current: " + current);
+                    plugin.getLogger().info("You have the latest version. Current: " + current);
                 }
             });
         });
