@@ -68,5 +68,12 @@
             <version>1.7.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Override Apache Commons Lang to a non-vulnerable version -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.18.0</version>
+        </dependency>
     </dependencies>
 </project>

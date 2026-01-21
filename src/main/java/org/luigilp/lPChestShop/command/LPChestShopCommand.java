@@ -1,7 +1,6 @@
 package org.luigilp.lPChestShop.command;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -11,6 +10,7 @@ import org.luigilp.lPChestShop.model.Shop;
 import org.luigilp.lPChestShop.session.CreateSession;
 import org.luigilp.lPChestShop.util.ItemUtils;
 import org.luigilp.lPChestShop.util.MoneyParser;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public final class LPChestShopCommand implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             plugin.getMessages().sendLines(sender, "help.lines");
@@ -50,136 +50,123 @@ public final class LPChestShopCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (sub.equals("create")) {
-            boolean permRequired = plugin.getConfig().getBoolean("settings.create.permission-required", false);
-            if (permRequired && !player.hasPermission("lpchestshop.create")) {
-                plugin.getMessages().send(player, "errors.no-permission");
-                return true;
-            }
-
-            int max = plugin.getConfig().getInt("settings.create.max-shops-per-player", -1);
-            if (max >= 0) {
-                int owned = plugin.getShopManager().countOwnedBy(player.getUniqueId());
-                if (owned >= max) {
-                    player.sendMessage("You reached the maximum amount of shops (" + max + ").");
+        switch (sub) {
+            case "create": {
+                boolean permRequired = plugin.getConfig().getBoolean("settings.create.permission-required", false);
+                if (permRequired && !player.hasPermission("lpchestshop.create")) {
+                    plugin.getMessages().send(player, "errors.no-permission");
                     return true;
                 }
-            }
 
-            int dist = plugin.getConfig().getInt("settings.create.max-target-distance", 5);
-            Block chestBlock = player.getTargetBlockExact(dist);
-            if (chestBlock == null || !plugin.getShopManager().isChestBlock(chestBlock)) {
-                plugin.getMessages().send(player, "errors.not-looking-at-chest", Map.of("distance", String.valueOf(dist)));
-                return true;
-            }
+                int max = plugin.getConfig().getInt("settings.create.max-shops-per-player", -1);
+                if (max >= 0) {
+                    int owned = plugin.getShopManager().countOwnedBy(player.getUniqueId());
+                    if (owned >= max) {
+                        player.sendMessage("You reached the maximum amount of shops (" + max + ").");
+                        return true;
+                    }
+                }
 
-            if (plugin.getShopManager().getByChest(chestBlock) != null) {
-                player.sendMessage("That chest is already a shop.");
-                return true;
-            }
-
-            if (plugin.getConfig().getBoolean("settings.create.require-empty-chest", true) && !plugin.getShopManager().isChestEmpty(chestBlock)) {
-                plugin.getMessages().send(player, "errors.chest-not-empty");
-                return true;
-            }
-
-            ItemStack hand = player.getInventory().getItemInMainHand();
-            if (ItemUtils.isAir(hand)) {
-                plugin.getMessages().send(player, "errors.need-item-in-hand");
-                return true;
-            }
-
-            if (args.length >= 3) {
-                int amount;
-                long price;
-                try {
-                    amount = Integer.parseInt(args[1].replace("x", "").trim());
-                    price = MoneyParser.parseToLong(args[2].trim());
-                } catch (Exception ex) {
+                int dist = plugin.getConfig().getInt("settings.create.max-target-distance", 5);
+                Block chestBlock = player.getTargetBlockExact(dist);
+                if (!plugin.getShopManager().isChestBlock(chestBlock)) {
+                    plugin.getMessages().send(player, "errors.not-looking-at-chest", Map.of("distance", String.valueOf(dist)));
+                    return true;
+                }
+                if (plugin.getShopManager().getByChest(chestBlock) != null) {
+                    player.sendMessage("That chest is already a shop.");
+                    return true;
+                }
+                if (plugin.getConfig().getBoolean("settings.create.require-empty-chest", true) && !plugin.getShopManager().isChestEmpty(chestBlock)) {
+                    plugin.getMessages().send(player, "errors.chest-not-empty");
+                    return true;
+                }
+                ItemStack hand = player.getInventory().getItemInMainHand();
+                if (ItemUtils.isAir(hand)) {
+                    plugin.getMessages().send(player, "errors.need-item-in-hand");
+                    return true;
+                }
+                if (args.length >= 3) {
+                    int amount;
+                    long price;
+                    try {
+                        amount = Integer.parseInt(args[1].replace("x", "").trim());
+                        price = MoneyParser.parseToLong(args[2].trim());
+                    } catch (Exception ex) {
+                        plugin.getMessages().send(player, "errors.invalid-format");
+                        return true;
+                    }
+                    if (amount <= 0 || price <= 0) {
+                        plugin.getMessages().send(player, "errors.invalid-format");
+                        return true;
+                    }
+                    var shop = plugin.getShopManager().createShop(player.getUniqueId(), chestBlock, hand.clone(), amount, price);
+                    if (shop == null) {
+                        plugin.getMessages().send(player, "errors.sign-blocked");
+                        return true;
+                    }
+                    plugin.getMessages().send(player, "create.created");
+                    return true;
+                }
+                boolean chatFallback = plugin.getConfig().getBoolean("settings.create.chat-fallback-enabled", true);
+                if (!chatFallback) {
                     plugin.getMessages().send(player, "errors.invalid-format");
                     return true;
                 }
-                if (amount <= 0 || price <= 0) {
-                    plugin.getMessages().send(player, "errors.invalid-format");
-                    return true;
-                }
-
-                var shop = plugin.getShopManager().createShop(player.getUniqueId(), chestBlock, hand.clone(), amount, price);
+                int timeoutSec = plugin.getConfig().getInt("settings.create.chat-timeout-seconds", 30);
+                long expires = System.currentTimeMillis() + timeoutSec * 1000L;
+                CreateSession session = new CreateSession(chestBlock.getLocation());
+                session.setTemplate(hand.clone());
+                session.setExpiresAtMs(expires);
+                UUID uid = player.getUniqueId();
+                plugin.getSessionManager().set(uid, session);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                    CreateSession s = plugin.getSessionManager().get(uid);
+                    if (s != null && System.currentTimeMillis() >= s.getExpiresAtMs()) {
+                        plugin.getSessionManager().clear(uid);
+                        plugin.getMessages().send(player, "create.timeout");
+                    }
+                }, timeoutSec * 20L);
+                plugin.getMessages().sendLines(player, "create.started", Map.of("seconds", String.valueOf(timeoutSec)));
+                return true;
+            }
+            case "info": {
+                Block target = player.getTargetBlockExact(6);
+                Shop shop = (target == null) ? null : plugin.getShopManager().getByAnyShopBlock(target);
                 if (shop == null) {
-                    plugin.getMessages().send(player, "errors.sign-blocked");
+                    player.sendMessage("Look at a shop sign/chest.");
                     return true;
                 }
-
-                plugin.getMessages().send(player, "create.created");
+                plugin.getMessages().send(player, "info.header");
+                plugin.getMessages().sendLines(player, "info.lines", plugin.getShopManager().infoPlaceholders(shop));
                 return true;
             }
-
-            boolean chatFallback = plugin.getConfig().getBoolean("settings.create.chat-fallback-enabled", true);
-            if (!chatFallback) {
-                plugin.getMessages().send(player, "errors.invalid-format");
-                return true;
-            }
-
-            int timeoutSec = plugin.getConfig().getInt("settings.create.chat-timeout-seconds", 30);
-            long expires = System.currentTimeMillis() + timeoutSec * 1000L;
-
-            CreateSession session = new CreateSession(chestBlock.getLocation());
-            session.setTemplate(hand.clone());
-            session.setExpiresAtMs(expires);
-
-            UUID uid = player.getUniqueId();
-            plugin.getSessionManager().set(uid, session);
-
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                CreateSession s = plugin.getSessionManager().get(uid);
-                if (s != null && System.currentTimeMillis() >= s.getExpiresAtMs()) {
-                    plugin.getSessionManager().clear(uid);
-                    plugin.getMessages().send(player, "create.timeout");
+            case "remove": {
+                Block target = player.getTargetBlockExact(6);
+                Shop shop = (target == null) ? null : plugin.getShopManager().getByAnyShopBlock(target);
+                if (shop == null) {
+                    player.sendMessage("Look at a shop sign/chest.");
+                    return true;
                 }
-            }, timeoutSec * 20L);
-
-            plugin.getMessages().sendLines(player, "create.started", Map.of("seconds", String.valueOf(timeoutSec)));
-            return true;
-        }
-
-        if (sub.equals("info")) {
-            Block target = player.getTargetBlockExact(6);
-            Shop shop = (target == null) ? null : plugin.getShopManager().getByAnyShopBlock(target);
-            if (shop == null) {
-                player.sendMessage("Look at a shop sign/chest.");
+                boolean owner = shop.getOwner().equals(player.getUniqueId());
+                boolean can = (owner && player.hasPermission("lpchestshop.remove.own")) || player.hasPermission("lpchestshop.remove.any");
+                if (!can) {
+                    plugin.getMessages().send(player, "errors.no-permission");
+                    return true;
+                }
+                plugin.getShopManager().removeShop(shop);
+                player.sendMessage("Shop removed.");
                 return true;
             }
-            plugin.getMessages().send(player, "info.header");
-            plugin.getMessages().sendLines(player, "info.lines", plugin.getShopManager().infoPlaceholders(shop));
-            return true;
-        }
-
-        if (sub.equals("remove")) {
-            Block target = player.getTargetBlockExact(6);
-            Shop shop = (target == null) ? null : plugin.getShopManager().getByAnyShopBlock(target);
-            if (shop == null) {
-                player.sendMessage("Look at a shop sign/chest.");
+            default: {
+                plugin.getMessages().sendLines(player, "help.lines");
                 return true;
             }
-
-            boolean owner = shop.getOwner().equals(player.getUniqueId());
-            boolean can = (owner && player.hasPermission("lpchestshop.remove.own")) || player.hasPermission("lpchestshop.remove.any");
-            if (!can) {
-                plugin.getMessages().send(player, "errors.no-permission");
-                return true;
-            }
-
-            plugin.getShopManager().removeShop(shop);
-            player.sendMessage("Shop removed.");
-            return true;
         }
-
-        plugin.getMessages().sendLines(player, "help.lines");
-        return true;
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         List<String> out = new ArrayList<>();
         if (args.length == 1) {
             out.add("create");
@@ -187,6 +174,20 @@ public final class LPChestShopCommand implements CommandExecutor, TabCompleter {
             out.add("remove");
             if (sender.hasPermission("lpchestshop.reload")) out.add("reload");
             out.add("help");
+        } else if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("create")) {
+                out.add("1");
+                out.add("16");
+                out.add("64");
+                out.add("<amount>");
+            }
+        } else if (args.length == 3) {
+            if (args[0].equalsIgnoreCase("create")) {
+                out.add("10");
+                out.add("100");
+                out.add("1000");
+                out.add("<price>");
+            }
         }
         return out;
     }
