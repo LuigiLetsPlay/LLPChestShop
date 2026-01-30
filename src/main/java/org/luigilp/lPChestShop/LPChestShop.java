@@ -54,7 +54,8 @@ public final class LPChestShop extends JavaPlugin {
         pm.registerEvents(new ChestDepositListener(this), this);
         pm.registerEvents(new ChestStockUpdateListener(this), this);
 
-        var cmd = getCommand("lpchestshop");
+        // Use the new primary command name. Aliases are defined in plugin.yml
+        var cmd = getCommand("chestshop");
         if (cmd != null) {
             var executor = new LPChestShopCommand(this);
             cmd.setExecutor(executor);
@@ -63,7 +64,8 @@ public final class LPChestShop extends JavaPlugin {
 
         GitHubReleaseUpdateChecker.check(this, "LuigiLetsPlay", "LPChestShop");
 
-        getLogger().info("LPChestShop enabled.");
+        // Adjust log message to match the new plugin name
+        getLogger().info("ChestShop enabled.");
     }
 
     private void ensureResource(String fileName) {
@@ -76,7 +78,7 @@ public final class LPChestShop extends JavaPlugin {
     @Override
     public void onDisable() {
         if (shopManager != null) shopManager.save();
-        getLogger().info("LPChestShop disabled.");
+        getLogger().info("ChestShop disabled.");
     }
 
     public void reloadAll() {

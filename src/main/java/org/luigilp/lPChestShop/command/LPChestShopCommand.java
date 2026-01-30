@@ -41,7 +41,8 @@ public final class LPChestShopCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
             plugin.reloadAll();
-            sender.sendMessage("LPChestShop reloaded.");
+            // Updated reload feedback message to match the new plugin name
+            sender.sendMessage("ChestShop reloaded.");
             return true;
         }
 

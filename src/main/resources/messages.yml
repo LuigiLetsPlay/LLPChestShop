@@ -1,11 +1,12 @@
-prefix: "&aLPChestShop &7»&r "
+# Updated message prefix to remove the LP branding.
+prefix: "&aChestShop &7»&r "
 
 help:
   lines:
-    - "&f/lpcs create <amount> <price> &7- Create a shop (look at a chest, item in hand)"
-    - "&f/lpcs info &7- Info about the shop you're looking at"
-    - "&f/lpcs remove &7- Remove the shop you're looking at (admin/owner)"
-    - "&f/lpcs reload &7- Reload configs (admin)"
+    - "&f/chestshop create <amount> <price> &7- Create a shop (look at a chest, item in hand)"
+    - "&f/chestshop info &7- Info about the shop you're looking at"
+    - "&f/chestshop remove &7- Remove the shop you're looking at (admin/owner)"
+    - "&f/chestshop reload &7- Reload configs (admin)"
 
 errors:
   no-permission: "&cYou don't have permission."
@@ -13,7 +14,8 @@ errors:
   not-looking-at-chest: "&cLook at a chest within {distance} blocks."
   chest-not-empty: "&cThe chest must be empty to create a shop."
   need-item-in-hand: "&cYou must hold the shop item in your main hand."
-  invalid-format: "&cInvalid format. Use: &f/lpcs create <amount> <price>&c. Example: &f/lpcs create 16 20k"
+  # Updated instructions to use the new command name.  Old aliases still work.
+  invalid-format: "&cInvalid format. Use: &f/chestshop create <amount> <price>&c. Example: &f/chestshop create 16 20k"
   sign-blocked: "&cCan't place the shop sign in front of the chest."
   economy-missing: "&cEconomy not available. Install Vault + an economy plugin."
   out-of-stock: "&cOut of stock."
