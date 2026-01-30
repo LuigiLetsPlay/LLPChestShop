@@ -1,6 +1,6 @@
 name: ChestShop
 # Bump version to reflect removal of LP branding
-version: '1.1.0'
+version: '1.0.4'
 main: org.luigilp.lPChestShop.LPChestShop
 api-version: '1.20'
 softdepend: [Vault]
