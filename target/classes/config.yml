@@ -83,10 +83,10 @@ gui:
         name: "&eHow it works"
         lore:
           - "&7Hold the item in your main hand."
-          - "&7Command: &f/lpcs create <amount> <price>"
-          - "&7Example: &f/lpcs create 16 20k"
+          - "&7Command: &f/chestshop create <amount> <price>"
+          - "&7Example: &f/chestshop create 16 20k"
           - "&7You can also type &f16 20k &7in chat"
-          - "&7if you used &f/lpcs create &7without args."
+          - "&7if you used &f/chestshop create &7without args."
         custom-model-data: 0
         glow: false
 
@@ -134,7 +134,8 @@ gui:
 
 sign:
   lines:
-    - "&a[LPShop]"
+    # Removed the LP branding from the sign header. This will show simply [Shop]
+    - "&a[Shop]"
     - "&f{item} &7x{amount}"
     - "&e{price}"
     - "&7Stock: &f{stock}"

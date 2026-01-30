@@ -1,14 +1,17 @@
-name: LPChestShop
-version: '1.0.3'
+name: ChestShop
+# Bump version to reflect removal of LP branding
+version: '1.0.4'
 main: org.luigilp.lPChestShop.LPChestShop
 api-version: '1.20'
 softdepend: [Vault]
 
 commands:
-  lpchestshop:
-    description: Main command for LPChestShop.
-    usage: /lpchestshop <create|reload|remove|info|help>
-    aliases: [lpcs]
+  chestshop:
+    # Updated the base command to remove the LP prefix.  Original command names
+    # remain as aliases to ensure backward compatibility.
+    description: Main command for ChestShop.
+    usage: /chestshop <create|reload|remove|info|help>
+    aliases: [lpcs, lpchestshop]
 
 permissions:
   lpchestshop.create:
